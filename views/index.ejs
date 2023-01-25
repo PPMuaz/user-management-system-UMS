@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="menu-bar">
+        <ul>
+            <li><b style="color:white;"><a href="http://localhost:8080/">Home</a></b></li>
+            <li><b style="color:white;"> <a href="http://localhost:8080/login">Login</a> </b></li>
+
+        </ul>
+    </div><br>
+    <div class="container">
+        <form name="myForm" method="post" onsubmit="return val()" action="index">
+            <h1 style="color:black;">Create Account</h1><br>
+            <input type="text" placeholder="Enter Your User Name" name="uname" id="uname" hidden><br>
+            <input type="text" placeholder="Enter Your Name" name="name" id="name"><br>
+            <label for="name_err" style="color:red;" id="nam_err">
+                <%=name%>
+            </label><br><br>
+            <!-- <span><i aria-hidden="true" class="fa fa-envelope"></i></span> -->
+            <input type="email" placeholder="Enter Your Mail" name="email" id="email"><br>
+            <label for="mail_err" style="color:red;" id="email_err">
+                <%=email%>
+            </label><br><br>
+            <input type="password" placeholder="Enter Your password" name="password" id="password"><br>
+            <label for="pass_err" style="color:red;" id="pass_err">
+                <%=password%>
+            </label><br><br>
+            <input type="password" placeholder="Enter Your re-password" name="re-password" id="re-password"><br>
+            <label for="re_pass_err" style="color:red;" id="re_pass_err">
+                <%=re_password%>
+            </label><br><br>
+            <input type="number" placeholder="Enter Your CNIC" name="cnic" maxlength="13" minlength="13" id="cnic"><br>
+            <label for="cnic_err" style="color:red;" id="ids_err">
+                <%=cnic%>
+            </label><br><br>
+            <input type="number" placeholder="Enter Your Mobile number" name="mobile" minlength="11" maxlength="11"
+                pattern="[0-9]{11}" id="mobile"><br>
+            <label for="mobile_err" style="color:red;" id="mobile_err">
+                <%=mobile%>
+            </label><br><br>
+            <button type="submit" class="colo">Register</button>
+
+        </form>
+        <p class="loginhere">
+            Have already an account ? <a href="http://localhost:8080/login" class="loginhere-link">Login
+                here</a>
+        </p>
+    </div>
+    <script>
+        function val() {
+            var name = document.forms["myForm"]["name"].value.trim();
+            var email = document.forms["myForm"]["email"].value.trim();
+            var password = document.getElementById("password").value;
+            var repassword = document.getElementById("re-password").value;
+            var cnic = document.forms["myForm"]["cnic"].value.trim();
+            var mobile = document.forms["myForm"]["mobile"].value.trim();
+            if (name === "" && email === "" && password === "" && repassword === "" && cnic === "" && mobile === "") {
+                document.getElementById("nam_err").innerHTML = "Enter Your Name";
+                document.getElementById("email_err").innerHTML = "Enter Your Email";
+                document.getElementById("pass_err").innerHTML = "Enter Your Password";
+                document.getElementById("re_pass_err").innerHTML = "Enter Your Confirm password";
+                document.getElementById("ids_err").innerHTML = "Enter Your CNIC";
+                document.getElementById("mobile_err").innerHTML = "Enter Your Mobile";
+                return false;
+            }
+            if (name === "") {
+                document.getElementById("nam_err").innerHTML = "Enter Your Name";
+                return false;
+            }
+            else if (email === "") {
+                document.getElementById("nam_err").innerHTML = "";
+                document.getElementById("email_err").innerHTML = "Enter Your Email";
+                return false;
+            }
+            else if (password === "") {
+                document.getElementById("email_err").innerHTML = "";
+                document.getElementById("pass_err").innerHTML = "Enter your password";
+                return false;
+            }
+            else if (password.length < 8) {
+                document.getElementById("pass_err").innerHTML = "Password must be equal than or greater than 8";
+                return false;
+            }
+            else if (repassword === "") {
+                document.getElementById("pass_err").innerHTML = "";
+                document.getElementById("re_pass_err").innerHTML = "Enter your confirm password";
+                return false;
+            }
+            else if (password !== repassword) {
+                document.getElementById("re_pass_err").innerHTML = "Your password not matched";
+                return false;
+            }
+            else if (cnic === "") {
+                document.getElementById("re_pass_err").innerHTML = "";
+                document.getElementById("ids_err").innerHTML = "Enter Your CNIC";
+                return false;
+            }
+            else if (cnic.length < 13 || cnic.length > 13) {
+                document.getElementById("ids_err").innerHTML = "Your CNIC must be 13 digits";
+                return false;
+            }
+            else if (mobile === "") {
+                document.getElementById("ids_err").innerHTML = "";
+                document.getElementById("mobile_err").innerHTML = "Enter Your Mobile";
+                return false;
+            }
+            else if (mobile.length < 11 || mobile.length > 11) {
+                document.getElementById("mobile_err").innerHTML = "Your mobile must be 11 digits";
+                return false;
+            }
+            else {
+                document.getElementById("mobile_err").innerHTML = "";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

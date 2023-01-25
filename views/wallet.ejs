@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard_style.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/jquery.js"></script> -->
+
+    <!-- <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"> -->
+
+    <title>Document</title>
+    <style>
+        .btnn {
+            border: 1px solid #b1a7e6;
+            border-radius: 30px;
+            padding: 15px 30px;
+            background-color: #aba0e9;
+            color: #4b4276;
+            text-decoration: none;
+            transition: 0.6s ease;
+        }
+
+        .btnn:hover {
+            background-color: white;
+            color: #696386;
+        }
+
+        .trr tr,
+        td {
+            border: 2px solid;
+            padding: 15px 50px;
+            color: #4b4276;
+            width: 100%;
+        }
+
+        .td {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .design {
+            padding-left: 30px;
+
+        }
+
+        input {
+            width: 30%;
+            background: none;
+            border: 1px solid #4b4276;
+            border-radius: 20px;
+            padding: 15px 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            color: #4b4276;
+            transition: 4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Permission</h2>
+            <ul>
+                <!-- <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="http://localhost:8080/area_of_interest"><i class="fa fa-address-book-o"></i>Area of
+                        Interest </a>
+                <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User Record</a>
+                </li>
+                <li><a href="http://localhost:8080/admin_add_user"><i class="fa fa-address-book-o"></i>Add User </a>
+                </li>
+                <li><a href="http://localhost:8080/wallet"><i class="fa fa-bank"></i>Wallet </a>
+                </li>
+                <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li> -->
+                <%if(role==="Admin"){%>
+
+                    <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+                    <li><a href="http://localhost:8080/area_of_interest"><i class="fa fa-address-book-o"></i>Area of
+                            Interest </a>
+                    <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User Record</a>
+                    </li>
+                    <li><a href="http://localhost:8080/admin_add_user"><i class="fa fa-address-book-o"></i>Add User </a>
+                    </li>
+                    <li><a href="http://localhost:8080/admin_wallet"><i class="fa fa-bank"></i>Wallet </a>
+                    </li>
+                    <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+                    <%} else if(role==="View" || role==="Edit" || role==="Delete" ){%>
+
+                        <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+
+                        <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User
+                                Record</a>
+                        </li>
+                        <li><a href="http://localhost:8080/wallet"><i class="fa fa-bank"></i>Wallet </a>
+                        </li>
+                        <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+                        <%}%>
+
+            </ul>
+        </div>
+    </div>
+    <div class="style">
+        <div class="container">
+            <% if(msg.length>0){%>
+                <div class="<%=err_msg%>">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <%= msg%>
+                </div>
+                <% }%>
+                    <div class="wallet-container text-center">
+                        <p style="font-size: 20px; color: #4b4276;">E- Wallet</p>
+                        <div class="img">
+                            <img src="https://cdn-icons-png.flaticon.com/64/2169/2169853.png"> <b>
+                        </div><br>
+                        <div class="balance">
+                            <span style="font-size: 16px; color: #4b4276;">Account Number</span><br>
+                            <span style="font-size: 28px; color: #6e6a81;">
+                                <%=account_number%>
+                            </span>
+                        </div><br>
+                        <div class="balance">
+                            <span style="font-size: 16px; color: #4b4276;">Total Balance</span><br>
+                            <span style="font-size: 28px; color: #6e6a81;">Pkr <%=balance%></span>
+                        </div><br>
+                        <div class="buttons">
+                            <a href="http://localhost:8080/location_check">
+                                <button class="btnn"><b>Take a Ride</b></button>
+                            </a>
+                            <!-- <a href="HTML.html">
+                        <button class="btnn"><b>Ride</b></button>
+                    </a> -->
+                        </div><br>
+                        <!-- <div id="newElementId"></div>
+                        <p id="demo"></p> -->
+                    </div><br>
+                    <span style="font-size: 16px; color: #4b4276;">Transaction History</span><br>
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                aria-selected="true">Incoming Transaction</button>
+                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                                aria-selected="false">Outgoing Transaction</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab"><br>
+                            <table border=2px solid black>
+                                <span style="font-size: 14px; color: #4b4276;">Incoming Transaction</span><br>
+                                <thead class="td">
+                                    <tr>
+                                        <td>Sender Detail</td>
+                                        <td>Recharge Amount</td>
+                                        <td>Date</td>
+                                        <td>Time</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <div class="trr">
+                                        <% if(length0>0){ %>
+
+                                            <%for(var i=0; i<Trip.Recharge_Transactions.length; i++){%>
+                                                <tr>
+                                                    <td>
+                                                        <%-Trip.Recharge_Transactions[i].sender_account %>
+                                                    </td>
+                                                    <td>
+                                                        <%=Trip.Recharge_Transactions[i].recharge %>
+                                                    </td>
+                                                    <td>
+                                                        <%=Trip.Recharge_Transactions[i].date %>
+                                                    </td>
+                                                    <td>
+                                                        <%=Trip.Recharge_Transactions[i].time %>
+                                                    </td>
+                                                </tr>
+                                                <br>
+                                                <% } %>
+                                                    <% }else{ %>
+                                                        <tr>
+                                                            <td colspan="4">
+                                                                <center>No Record Found</center>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+
+                                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <br>
+                            <table border=2px solid black>
+                                <span style="font-size: 14px; color: #4b4276;">Outgoing Transaction</span><br>
+                                <thead class="td">
+                                    <tr>
+                                        <td>Location</td>
+                                        <td>Fare</td>
+                                        <td>Date</td>
+                                        <td>Time</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <div class="trr">
+                                        <% if(length1>0){ %>
+                                            <%for(var i=0; i<Trip.Trip_Transactions.length; i++){%>
+                                                <tr>
+                                                    <td>
+                                                        <%-Trip.Trip_Transactions[i].location %>
+                                                    </td>
+                                                    <td>
+                                                        <%=Trip.Trip_Transactions[i].fare %>
+                                                    </td>
+                                                    <td>
+                                                        <%=Trip.Trip_Transactions[i].date %>
+                                                    </td>
+                                                    <td>
+                                                        <%=Trip.Trip_Transactions[i].time %>
+                                                    </td>
+                                                </tr>
+                                                <br>
+                                                <% } %>
+                                                    <% }else{ %>
+                                                        <tr>
+                                                            <td colspan="4">
+                                                                <center>No Record Found</center>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

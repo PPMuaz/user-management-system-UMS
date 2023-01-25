@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dashboard_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="css/dashboard_style.css"> -->
+    <title>Recharge Account</title>
+    <style>
+        .btnn {
+            width: 20%;
+            border: 1px solid #b1a7e6;
+            border-radius: 30px;
+            padding: 15px 30px;
+            background-color: #aba0e9;
+            color: #4b4276;
+            text-decoration: none;
+            transition: 0.6s ease;
+        }
+
+        .btnn:hover {
+            background-color: white;
+            color: #696386;
+        }
+
+        .design {
+            padding-left: 30px;
+        }
+
+        .input {
+            width: 1100px;
+            height: 20%;
+            background: none;
+            border: 1px solid #4b4276;
+            border-radius: 20px;
+            padding: 15px 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            color: #4b4276;
+            transition: 4s;
+        }
+
+        .fare {
+            padding-left: 20%;
+        }
+    </style>
+    <style>
+        .btnn {
+            width: 20%;
+            border: 1px solid #b1a7e6;
+            border-radius: 30px;
+            padding: 15px 30px;
+            background-color: #aba0e9;
+            color: #4b4276;
+            text-decoration: none;
+            transition: 0.6s ease;
+        }
+
+        .btnn:hover {
+            background-color: white;
+            color: #696386;
+        }
+
+        .design {
+            padding-left: 30px;
+        }
+
+        .input {
+            width: 1100px;
+            height: 20%;
+            background: none;
+            border: 1px solid #4b4276;
+            border-radius: 20px;
+            padding: 15px 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            color: #4b4276;
+            transition: 4s;
+        }
+
+        .fare {
+            padding-left: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Permission</h2>
+            <ul>
+                <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="http://localhost:8080/area_of_interest"><i class="fa fa-address-book-o"></i>Area of
+                        Interest </a>
+                <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User Record</a></li>
+                <li><a href="http://localhost:8080/admin_add_user"><i class="fa fa-address-book-o"></i>Add User </a>
+                </li>
+                <li><a href="http://localhost:8080/admin_wallet"><i class="fa fa-bank"></i>Wallet </a>
+                </li>
+                <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="style">
+        <div class="container">
+            <% if(msg.length>0){%>
+                <div class="<%=err_msg%>">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <%= msg%>
+                </div>
+                <% }%>
+                    <header>Recharge Account</header>
+                    <form name="myForm" method="post" onsubmit="return val()"
+                        action="/recharge_wallet/<%= account_input[0]._id %> ">
+                        <div class="form first">
+                            <div class="details personal">
+                                <span class="title">Account Details</span>
+                                <div class="fields">
+                                    <label>Account #</label>
+                                    <% for(var i=0; i< account_input.length; i++){ %>
+                                        <input type="text" class="input" id="account" name="account"
+                                            placeholder="Enter Account Number" oninput="myFunction()" minlength="13"
+                                            maxlength="13" value="<%= account_input[i].account.cnic %>">
+                                        <input type="text" class="input" id="name" name="name" placeholder=""
+                                            value="<%= account_input[i].account.name %>" hidden>
+                                        <% } %>
+                                            <span style="color: red;" id="account_err">
+                                                <%=account%>
+                                            </span>
+                                            <div>
+                                                <br>
+                                                <label>Amount</label>
+                                                <input type="text" class="input" id="amount" name="amount"
+                                                    placeholder="Enter Amount" oninput="myFunction()" value="">
+                                                <span style="color: red;" id="amount_err">
+                                                    <%=amount%>
+                                                </span>
+                                            </div>
+                                </div>
+                            </div>
+                            <button class="nextBtn" id="add" type="submit">
+                                <span class="btnText">Recharge</span>
+                                <i class="fa fa-cc-mastercard"></i>
+                            </button>
+                        </div>
+        </div>
+        </form>
+    </div>
+    </div>
+    <script>
+        function myFunction() {
+            var account = document.forms["myForm"]["account"].value.trim();
+            var amount = document.forms["myForm"]["amount"].value.trim();
+            if (isNaN(account)) {
+                document.getElementById("account_err").innerHTML = "Please write only numeric value <br>";
+                return false;
+            }
+            else {
+                document.getElementById("account_err").innerHTML = "";
+            }
+            if (isNaN(amount)) {
+                document.getElementById("amount_err").innerHTML = "Please write only numeric value";
+                return false;
+            }
+            else {
+                document.getElementById("amount_err").innerHTML = "";
+            }
+        }
+        function val() {
+            var account = document.forms["myForm"]["account"].value.trim();
+            var amount = document.forms["myForm"]["amount"].value.trim();
+            if (account === "" && amount === "") {
+                document.getElementById("account_err").innerHTML = "Enter Your Account Number";
+                document.getElementById("amount_err").innerHTML = "Enter Your Balance Amount";
+                return false;
+            }
+            else if (account === "") {
+                document.getElementById("account_err").innerHTML = "Enter Your Account Number";
+                return false;
+            }
+            else {
+                if (isNaN(account)) {
+                    document.getElementById("account_err").innerHTML = "Please write only numeric value <br>";
+                    return false;
+                }
+                else {
+                    document.getElementById("account_err").innerHTML = "";
+                }
+            }
+            if (amount === "") {
+                document.getElementById("account_err").innerHTML = "";
+                document.getElementById("amount_err").innerHTML = "Enter Your Amount Balance";
+                return false;
+            }
+            else if (amount !== null) {
+                if (isNaN(account)) {
+                    document.getElementById("amount_err").innerHTML = "Please write only numeric value <br>";
+                    return false;
+                }
+                else {
+                    document.getElementById("amount_err").innerHTML = "";
+                }
+            }
+            else {
+                document.getElementById("amount_err").innerHTML = "";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

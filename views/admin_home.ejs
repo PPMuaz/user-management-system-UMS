@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Admin Home</title>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Permission</h2>
+            <ul>
+                <%if(role==="Admin"){%>
+
+                    <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+                    <li><a href="http://localhost:8080/area_of_interest"><i class="fa fa-address-book-o"></i>Area of
+                            Interest </a>
+                    <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User Record</a>
+                    </li>
+                    <li><a href="http://localhost:8080/admin_add_user"><i class="fa fa-address-book-o"></i>Add User </a>
+                    </li>
+                    <li><a href="http://localhost:8080/admin_wallet"><i class="fa fa-bank"></i>Wallet </a>
+                    </li>
+                    <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+                    <%} else if(role==="View" || role==="Edit" || role==="Delete" ){%>
+
+                        <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+
+                        <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User
+                                Record</a>
+                        </li>
+                        <li><a href="http://localhost:8080/wallet"><i class="fa fa-bank"></i>Wallet </a>
+                        </li>
+                        <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+                        <%}%>
+            </ul>
+        </div>
+    </div>
+    <div class="style">
+        <div class="container">
+            <% if(msg.length>0){%>
+                <div class="<%=err_msg%>">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <%= msg%>
+                </div>
+                <% }%>
+                    <h1 style="color:#4b4276;">
+                        Welcome
+                    </h1>
+
+        </div><br>
+        <div class="container">
+            <h1 style="color: #4b4276;">Have a nice day!</h1>
+        </div><br><br><br><br><br><br><br><br><br><br>
+        <center>
+            <div class="img">
+                <img src="https://cdn-icons-png.flaticon.com/64/8820/8820320.png"> <b><span style="color: #4b4276;">HOME
+                        PAGE</span></b>
+            </div>
+        </center>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="css/dashboard_style.css"> -->
+    <title>Add User</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            list-style: none;
+            text-decoration: none;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        .style {
+            /* margin: 2px;
+    padding: 2px; */
+            min-height: 100vh;
+            /* display: flex; */
+            padding-bottom: 10%;
+            padding-left: 13.9%;
+
+            /* align-items: center;
+    justify-content: center; */
+        }
+
+        body {
+
+            background: whitesmoke;
+        }
+
+        .wrapper {
+            display: flex;
+            position: relative;
+        }
+
+        .wrapper .sidebar {
+            position: fixed;
+            width: 200px;
+            height: 100%;
+            background: #4b4276;
+            padding: 30px 0;
+        }
+
+        .wrapper .sidebar h2 {
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 5px;
+            color: #fff;
+        }
+
+        .wrapper .sidebar h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            height: 3px;
+            width: 27px;
+            border-radius: 8px;
+            background-color: #4070f4;
+        }
+
+        .wrapper .sidebar ul li {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgb(225, 225, 225, 0.05);
+        }
+
+        .wrapper .sidebar ul li a {
+            color: rgb(217, 197, 197);
+        }
+
+        .wrapper .sidebar ul li a .fa {
+            width: 25px;
+            color: white;
+        }
+
+        .wrapper .sidebar ul li:hover {
+            background: #594f8d;
+        }
+
+        .wrapper .sidebar ul li:hover a {
+            color: white;
+        }
+
+        /* .wrapper .main_content {
+    width: 100%;
+    margin-left: 200px;
+
+}
+
+.wrapper .main_content .header {
+    padding: 20px;
+    background: #fff;
+} */
+
+        .container {
+            position: relative;
+            max-width: 1150px;
+            width: 100%;
+            border-radius: 6px;
+            padding: 30px;
+            margin: 0 15px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container header {
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .container header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            height: 3px;
+            width: 27px;
+            border-radius: 8px;
+            background-color: #4070f4;
+        }
+
+        .container form {
+
+            position: relative;
+            margin-top: 16px;
+            min-height: 630px;
+            background-color: #fff;
+            /* overflow: hidden; */
+        }
+
+        .container form .form {
+            position: absolute;
+            background-color: #fff;
+            transition: 0.3s ease;
+        }
+
+        .container form .form.second {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(100%);
+        }
+
+        form.secActive .form.second {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        form.secActive .form.first {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-100%);
+        }
+
+        .container form .title {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 6px 0;
+            color: #333;
+        }
+
+        .container form .fields {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        form .fields .input-field {
+            display: flex;
+            width: calc(100% / 3 - 15px);
+            flex-direction: column;
+            margin: 4px 0;
+        }
+
+        .input-field label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #2e2e2e;
+        }
+
+        .input-field input,
+        select {
+            outline: none;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 15px;
+            height: 42px;
+            margin: 8px 0;
+        }
+
+        .textareas {
+            outline: none;
+            width: 317%;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 15px;
+            height: 200px;
+            margin: 8px 0;
+        }
+
+        .input-field input :focus,
+        .input-field select:focus {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+        }
+
+        .input-field select,
+        .input-field input[type="date"] {
+            color: #707070;
+        }
+
+        .input-field input[type="date"]:valid {
+            color: #333;
+        }
+
+        .container form button,
+        .backBtn {
+            display: inline;
+            align-items: center;
+            justify-content: center;
+            height: 45px;
+            max-width: 200px;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #fff;
+            border-radius: 5px;
+            margin: 25px 0;
+            background-color: #4070f4;
+            transition: all 0.3s linear;
+            cursor: pointer;
+        }
+
+        .container form .btnText {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        form button:hover {
+            background-color: #265df2;
+        }
+
+        form button i,
+        form .backBtn i {
+            margin: 0 6px;
+        }
+
+        form .backBtn i {
+            transform: rotate(180deg);
+        }
+
+        form .buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        form .buttons button,
+        .backBtn {
+            margin-right: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Permission</h2>
+            <ul>
+                <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="http://localhost:8080/area_of_interest"><i class="fa fa-address-book-o"></i>Area of
+                        Interest </a>
+                <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User Record</a></li>
+                <li><a href="http://localhost:8080/admin_add_user"><i class="fa fa-address-book-o"></i>Add User </a>
+                </li>
+                <li><a href="http://localhost:8080/admin_wallet"><i class="fa fa-bank"></i>Wallet </a>
+                </li>
+                <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="style">
+        <div class="container">
+            <% if(msg.length>0){%>
+                <div class="<%=err_msg%>">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <%= msg%>
+                </div>
+                <% }%>
+                    <header>Add User</header>
+
+                    <form name="myForm" method="post" onsubmit="return val()" action="/admin_add_user">
+                        <div class="form first">
+                            <div class="details personal">
+                                <span class="title">Account Details</span>
+
+                                <div class="fields">
+                                    <!-- <div class="input-field">
+                                <label>User Name</label>
+                                <input type="text" id="uname" name="uname" placeholder="Enter your user name">
+                            </div> -->
+                                    <div class="input-field">
+                                        <label>Full Name</label>
+                                        <input type="text" id="name" name="name" placeholder="Name" value="">
+                                        <label style="color: red;" id="nam_err">
+                                            <%=name%>
+                                        </label>
+                                    </div>
+
+                                    <!-- <div class="input-field">
+                                <label>Date of Birth</label>
+                                <input type="date" id="dob" name="dob" placeholder="Enter birth date">
+                            </div> -->
+
+                                    <div class="input-field">
+                                        <label>Email</label>
+                                        <input type="email" id="mail" name="email" placeholder="Email" value="">
+                                        <label style="color: red;" id="email_err">
+                                            <%=email%>
+                                        </label>
+                                    </div>
+                                    <div class="input-field">
+                                        <label>Password</label>
+                                        <input type="password" id="password" name="password" placeholder="Password"
+                                            value="">
+                                        <label style="color: red;" id="pass_err">
+                                            <%=password%>
+                                        </label>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Mobile Number</label>
+                                        <input type="text" id="mobile" name="mobile" minlength="11" maxlength="11"
+                                            placeholder="Mobile Number" oninput="myFunction()" value="">
+                                        <label style="color: red;" id="mobile_err">
+                                            <%=mobile%>
+                                        </label>
+                                    </div>
+
+                                    <!-- <div class="input-field">
+                                <label>Gender</label>
+                                <select id="gender" name="gender">
+                                    <option disabled selected>Select gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Others</option>
+                                </select>
+                            </div> -->
+
+                                    <!-- <div class="input-field">
+                                <label>Occupation</label>
+                                <input type="text" id="occup" name="occup" placeholder="Enter your occupation">
+                            </div> -->
+                                    <div class="input-field">
+                                        <label>CNIC</label>
+                                        <input type="text" id="cnic" name="cnic" minlength="13" maxlength="13"
+                                            placeholder="CNIC" oninput="myFunction()" value="">
+                                        <label style="color: red;" id="ids_err">
+                                            <%=cnic%>
+                                        </label>
+                                    </div>
+                                    <div class="input-field">
+                                        <label hidden>Date of Birth</label>
+                                        <input type="date" id="dob" name="dob" placeholder="Enter birth date" disabled
+                                            hidden>
+                                    </div>
+                                    <!-- <div class="input-field">
+                                <label>University/School</label>
+                                <input type="text" id="university" name="university"
+                                    placeholder="Enter your University/School">
+                            </div> -->
+
+                                </div>
+                            </div>
+
+                            <button class="nextBtn" id="add" type="submit">
+                                <span class="btnText">Add User</span>
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <!-- <a href="http://localhost:8080/admin_view">
+                        <button class="nextBtn" id="cancel">
+                            <span class="btnText">Cancel</span>
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </a> -->
+                        </div>
+        </div>
+
+
+        </form>
+    </div>
+    </div>
+    <script>
+        function myFunction() {
+            var mobile = document.forms["myForm"]["mobile"].value.trim();
+            var cnic = document.forms["myForm"]["cnic"].value.trim();
+            if (isNaN(mobile)) {
+                document.getElementById("mobile_err").innerHTML = "Please write only numeric value";
+            }
+            else {
+                document.getElementById("mobile_err").innerHTML = "";
+            }
+            if (isNaN(cnic)) {
+                document.getElementById("ids_err").innerHTML = "Please write only numeric value";
+            }
+            else {
+                document.getElementById("ids_err").innerHTML = "";
+            }
+        }
+        function val() {
+            var name = document.forms["myForm"]["name"].value.trim();
+            var email = document.forms["myForm"]["email"].value.trim();
+            var password = document.getElementById("password").value;
+            // var repassword = document.getElementById("re-password").value;
+            var cnic = document.forms["myForm"]["cnic"].value.trim();
+            var mobile = document.forms["myForm"]["mobile"].value.trim();
+            if (name === "" && email === "" && password === "" && repassword === "" && cnic === "" && mobile === "") {
+                document.getElementById("nam_err").innerHTML = "Enter Your Name";
+                document.getElementById("email_err").innerHTML = "Enter Your Email";
+                document.getElementById("pass_err").innerHTML = "Enter Your Password";
+                // document.getElementById("re_pass_err").innerHTML = "Enter Your Confirm password";
+                document.getElementById("ids_err").innerHTML = "Enter Your CNIC";
+                document.getElementById("mobile_err").innerHTML = "Enter Your Mobile";
+                return false;
+            }
+            if (name === "") {
+                document.getElementById("nam_err").innerHTML = "Enter Your Name";
+                return false;
+            }
+            else if (email === "") {
+                document.getElementById("nam_err").innerHTML = "";
+                document.getElementById("email_err").innerHTML = "Enter Your Email";
+                return false;
+            }
+            else if (password === "") {
+                document.getElementById("nam_err").innerHTML = "";
+                document.getElementById("email_err").innerHTML = "";
+                document.getElementById("pass_err").innerHTML = "Enter your password";
+                return false;
+            }
+            else if (password.length < 8) {
+                document.getElementById("nam_err").innerHTML = "";
+                document.getElementById("email_err").innerHTML = "";
+                document.getElementById("pass_err").innerHTML = "Password must be equal than or greater than 8";
+                return false;
+            }
+            else if (mobile === "") {
+                document.getElementById("pass_err").innerHTML = "";
+                document.getElementById("mobile_err").innerHTML = "Enter Your Mobile";
+                return false;
+            }
+            else if (mobile.length < 11 || mobile.length > 11) {
+                document.getElementById("nam_err").innerHTML = "";
+                document.getElementById("email_err").innerHTML = "";
+                document.getElementById("pass_err").innerHTML = "";
+                document.getElementById("mobile_err").innerHTML = "Your mobile must be 11 digits";
+                return false;
+            }
+            else if (cnic === "") {
+                document.getElementById("mobile_err").innerHTML = "";
+                document.getElementById("ids_err").innerHTML = "Enter Your CNIC";
+                return false;
+            }
+            else if (cnic.length < 13 || cnic.length > 13) {
+                document.getElementById("nam_err").innerHTML = "";
+                document.getElementById("email_err").innerHTML = "";
+                document.getElementById("pass_err").innerHTML = "";
+                document.getElementById("mobile_err").innerHTML = "";
+                document.getElementById("ids_err").innerHTML = "Your CNIC must be 13 digits";
+                return false;
+            }
+            else {
+                document.getElementById("ids_err").innerHTML = "";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

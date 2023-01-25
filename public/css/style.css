@@ -1,0 +1,115 @@
+input {
+    padding: 17px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b4276;
+    width: 100%;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+}
+
+.container {
+    width: 660px;
+    position: relative;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 50px 85px;
+}
+
+.colo {
+    width: 20%;
+    margin-left: 45%;
+    font-size: large;
+    background: #4070f4;
+    border: 1px solid #4070f4;
+    border-radius: 3px;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    color: white;
+    transition: 4s;
+}
+
+.btn_style {
+    width: 75%;
+    margin-left: 15%;
+    background: none;
+    border: 1px solid #4b4276;
+    margin-bottom: 20px;
+    color: white;
+}
+
+label {
+    padding: 17px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b4276;
+}
+
+.btnn {
+    margin-left: 45%;
+    width: 80%;
+}
+
+* {
+    PADDING: 0;
+    margin: 0;
+
+}
+
+body {
+    background-color: #4070f4;
+    /* background-size: cover;
+    background-position: center; */
+}
+
+h1 {
+
+    color: white;
+    text-align: center;
+}
+
+.menu-bar {
+    background-color: #4667c3;
+    text-align: left;
+    /* margin-left: 15%; */
+}
+
+.menu-bar ul {
+    display: inline-flex;
+    list-style: none;
+    margin-left: 15%;
+}
+
+.menu-bar ul li {
+    width: 110px;
+    margin: 15px;
+    padding: 15px;
+}
+
+.menu-bar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.active,
+.menu-bar ul li:hover {
+    background: #4070f4;
+    border-radius: 3px;
+}
+
+.loginhere {
+    color: #555;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 91px;
+    margin-bottom: 5px;
+}
+
+.loginhere-link {
+    font-weight: 700;
+    color: #4b4276;
+}

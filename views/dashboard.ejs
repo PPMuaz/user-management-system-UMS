@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Permission</h2>
+            <ul>
+                <li><a href="http://localhost:8080/home"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="http://localhost:8080/dashboard"><i class="fa fa-address-card-o"></i>Profile</a></li>
+                <!-- <li><a href="#"><i class="fa fa-address-book-o"></i>Contact </a></li> -->
+                <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- <div class="main_content">
+        <div class="header">
+            Welcome! Have a Nice day.
+        </div>
+        <div class="info">
+            <div>lorem lorem</div>
+        </div>
+    </div> -->
+    <div class="style">
+        <div class="container">
+            <% if(msg.length>0){%>
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <%= msg%>
+                </div>
+                <% }%>
+                    <header>Profile</header>
+
+                    <form method="post" action="add">
+                        <div class="form first">
+                            <div class="details personal">
+                                <span class="title">Personal Details</span>
+
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>User Name</label>
+                                        <input type="text" id="uname" name="uname" value="<%=uname%>"
+                                            placeholder="Enter your user name">
+                                    </div>
+                                    <div class="input-field">
+                                        <label>Full Name</label>
+                                        <input type="text" id="fname" name="fname" placeholder="Enter your name"
+                                            value="<%=name%>" readonly>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Date of Birth</label>
+                                        <input type="date" id="dob" name="dob" value="<%=dob%>"
+                                            placeholder="Enter birth date">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Email</label>
+                                        <input type="email" id="mail" name="email" placeholder="Enter your email"
+                                            value="<%=email%>" readonly>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Mobile Number</label>
+                                        <input type="number" id="phone" name="mobile" placeholder="Enter mobile number"
+                                            value="<%=mobile%>" readonly>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Gender</label>
+                                        <select id="gender" name="gender">
+                                            <option>
+                                                <%=gender%>
+                                            </option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Others</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <label>Occupation</label>
+                                        <input type="text" id="occup" name="occup" value="<%=occup%>"
+                                            placeholder="Enter your occupation">
+                                    </div>
+                                    <div class="input-field">
+                                        <label>CNIC</label>
+                                        <input type="number" id="cnic" name="cnic" placeholder="Enter your cnic"
+                                            value="<%=cnic%>" readonly>
+                                    </div>
+                                    <div class="input-field">
+                                        <label>University/School</label>
+                                        <input type="text" id="university" name="university" value="<%=university%>"
+                                            placeholder="Enter your University/School">
+                                    </div>
+                                    <div class="input-field">
+                                        <label>Area of Interest</label>
+                                        <select id="aoi" name="aoi">
+                                            <option>
+                                                <%=aoi%>
+                                            </option>
+                                            <% aoi_record.forEach((record)=>{%>
+                                                <option><%- record.area %></option>
+                                                <% })%>
+                                                    <!-- <option>Female</option>
+                                            <option>Others</option> -->
+                                        </select>
+                                    </div>
+                                    <div class="input-field">
+                                        <label hidden>ID</label>
+                                        <input type="text" id="u_id" name="u_id" value="<%=id%>"
+                                            placeholder="Enter your ID" hidden>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>About YourSelf</label>
+                                    <textarea id="into" name="intro" class="textareas"
+                                        placeholder="About YourSelf"><%=intro%></textarea>
+                                </div>
+                            </div>
+
+                            <button class="nextBtn" id="save" type="submit">
+                                <span class="btnText">Update</span>
+                                <i class="fa fa-save"></i>
+                            </button>
+                            <!-- <button class="nextBtn" id="edit" onclick="return validity()">
+                        <span class="btnText">Edit</span>
+                        <i class="fa fa-edit"></i>
+                    </button> -->
+                        </div>
+        </div>
+
+
+        </form>
+    </div>
+    </div>
+
+    <!-- <script>
+        function validity() {
+            document.querySelector('#uname').disabled = true;
+            document.querySelector('#fname').disabled = true;
+            document.querySelector('#dob').disabled = true;
+            document.querySelector('#mail').disabled = true;
+            document.querySelector('#phone').disabled = true;
+            document.querySelector('#gender').disabled = true;
+            document.querySelector('#occup').disabled = true;
+            document.querySelector('#cnic').disabled = true;
+            document.querySelector('#university').disabled = true;
+            document.querySelector('#intro').disabled = true;
+        }
+    </script> -->
+
+</body>
+
+</html>

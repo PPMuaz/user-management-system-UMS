@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="public\css\home.css"> -->
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="menu-bar">
+        <ul>
+            <li><b style="color:white;"><a href="http://localhost:8080/">Home</a></b></li>
+            <li><b style="color:white;"> <a href="http://localhost:8080/login">Login</a> </b></li>
+
+        </ul>
+    </div><br>
+    <div class="container">
+        <form name="myForm" method="post" onsubmit="return val()" action="dashboard">
+            <h1 style="color:black;">LOGIN</h1><br>
+            <label id="credential" style="color: red;">
+                <%=name%>
+            </label><br>
+            <input type="email" placeholder="Enter your Email" name="email" id="email"><br>
+            <label for="mail_err" style="color:red;" id="email_err"></label><br><br>
+            <input type="password" placeholder="Enter your Password" name="password" id="password"><br>
+            <label for="pass_err" style="color:red;" id="pass_err"></label><br><br>
+            <button type="submit" class="colo">Login</button>
+
+        </form>
+        <p class="loginhere">
+            Don’t you have an account ? <a href="http://localhost:8080" class="loginhere-link">Sign up
+            </a>
+        </p>
+    </div>
+    <script>
+        function val() {
+            var email = document.forms["myForm"]["email"].value.trim();
+            var password = document.getElementById("password").value;
+            if (email === "" && password === "") {
+                document.getElementById("email_err").innerHTML = "Enter Your Email";
+                document.getElementById("pass_err").innerHTML = "Enter Your Password";
+                return false;
+            }
+            else if (email === "") {
+                document.getElementById("nam_err").innerHTML = "";
+                document.getElementById("email_err").innerHTML = "Enter Your Email";
+                return false;
+            }
+            else if (password === "") {
+                document.getElementById("email_err").innerHTML = "";
+                document.getElementById("pass_err").innerHTML = "Enter your password";
+                return false;
+            }
+            else {
+                document.getElementById("pass_err").innerHTML = "";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

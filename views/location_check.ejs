@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"> -->
+
+    <title>Document</title>
+    <style>
+        .btnn {
+            width: 20%;
+            border: 1px solid #b1a7e6;
+            border-radius: 30px;
+            padding: 15px 30px;
+            background-color: #aba0e9;
+            color: #4b4276;
+            text-decoration: none;
+            transition: 0.6s ease;
+        }
+
+        .btnn:hover {
+            background-color: white;
+            color: #696386;
+        }
+
+        .design {
+            padding-left: 30px;
+        }
+
+        .input {
+            width: 1100px;
+            height: 20%;
+            background: none;
+            border: 1px solid #4b4276;
+            border-radius: 20px;
+            padding: 15px 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            color: #4b4276;
+            transition: 4s;
+        }
+
+        .fare {
+            padding-left: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Permission</h2>
+            <ul>
+                <%if(role==="Admin"){%>
+
+                    <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+                    <li><a href="http://localhost:8080/area_of_interest"><i class="fa fa-address-book-o"></i>Area of
+                            Interest </a>
+                    <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User Record</a>
+                    </li>
+                    <li><a href="http://localhost:8080/admin_add_user"><i class="fa fa-address-book-o"></i>Add User </a>
+                    </li>
+                    <li><a href="http://localhost:8080/admin_wallet"><i class="fa fa-bank"></i>Wallet </a>
+                    </li>
+                    <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+                    <%} else if(role==="View" || role==="Edit" || role==="Delete" ){%>
+
+                        <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+
+                        <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User
+                                Record</a>
+                        </li>
+                        <li><a href="http://localhost:8080/wallet"><i class="fa fa-bank"></i>Wallet </a>
+                        </li>
+                        <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+                        <%}%>
+            </ul>
+        </div>
+    </div>
+    <div class="style">
+        <div class="container">
+            <% if(msg.length>0){%>
+                <div class="<%=err_msg%>">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <%= msg%>
+                </div>
+                <% }%>
+                    <div class="wallet-container">
+                        <p style="font-size: 20px; color: #4b4276;">E- Wallet</p>
+                        <span style="font-size: 16px; color: #4b4276;">Destination</span><br><br>
+                        <form name="myForm" method="post" onclick="return Validate()" action="/location_check">
+                            <div class="form first">
+                                <div class="details personal">
+                                    <span class="title">Destination</span>
+
+                                    <!-- <div class="fields"> -->
+                                    <div class="input-field">
+                                        <!-- <label>Role</label> -->
+                                        <select id="location" name="location" class="input">
+                                            <option value="">Selcet Location</option>
+                                            <option value="1">Minar-e-Pakistan</option>
+                                            <option value="2">Lahore Fort</option>
+                                            <option value="3">MM_Alam</option>
+                                            <option value="4">Islamabad</option>
+                                            <option value="5">IT Tower</option>
+                                        </select>
+                                    </div>
+
+                                    <label id="loc_err" style="font-size: 14px; color: red;"></label>
+                                    <!-- </div> -->
+                                </div>
+                                <label id="fare"
+                                    style="font-size: 16px; color: #4b4276; font-weight: bold;"></label><br>
+                                <label id="fare_desc" class="fare" style="font-size: 18px; color: #4b4276;"></label><br>
+                                <button class="nextBtn" id="add" type="submit">
+                                    <span class="btnText">GO</span>
+                                    <i class="fa fa-search"></i>
+                                </button><br><br>
+                            </div>
+                    </div>
+
+
+                    </form>
+                    <br><br>
+                    <div id="map-canvas"></div>
+        </div><br>
+
+    </div>
+    </div>
+    <script type="text/javascript">
+        function Validate() {
+            var loc_value = document.getElementById("location");
+            if (loc_value.value === "") {
+                //If the "Please Select" option is selected display error.
+                document.getElementById("loc_err").innerHTML = "Please Select Location";
+                document.getElementById("fare").innerHTML = "";
+                document.getElementById("fare_desc").innerHTML = "";
+                // document.getElementById("fare_desc").innerHTML = "Destination Fare";
+                return false;
+            }
+            else if (loc_value.value === "1") {
+                document.getElementById("loc_err").innerHTML = "";
+                document.getElementById("fare").innerHTML = "Destination Fare";
+                document.getElementById("fare_desc").innerHTML = "Total fare is 300PKR Click on GO button to travel";
+                return true;
+            }
+            else if (loc_value.value === "2") {
+                document.getElementById("loc_err").innerHTML = "";
+                document.getElementById("fare").innerHTML = "Destination Fare";
+                document.getElementById("fare_desc").innerHTML = "Total fare is 600PKR Click on GO button to travel";
+                // return false;
+            }
+            else if (loc_value.value === "3") {
+                document.getElementById("loc_err").innerHTML = "";
+                document.getElementById("fare").innerHTML = "Destination Fare";
+                document.getElementById("fare_desc").innerHTML = "Total fare is 400PKR Click on GO button to travel";
+                // return false;
+            }
+            else if (loc_value.value === "4") {
+                document.getElementById("loc_err").innerHTML = "";
+                document.getElementById("fare").innerHTML = "Destination Fare";
+                document.getElementById("fare_desc").innerHTML = "Total fare is 1000PKR Click on GO button to travel";
+                // return false;
+            }
+            else if (loc_value.value === "5") {
+                document.getElementById("loc_err").innerHTML = "";
+                document.getElementById("fare").innerHTML = "Destination Fare";
+                document.getElementById("fare_desc").innerHTML = "Total fare is 350PKR Click on GO button to travel";
+                // return false;
+            }
+            else {
+                document.getElementById("loc_err").innerHTML = "";
+                document.getElementById("fare").innerHTML = "";
+                document.getElementById("fare_desc").innerHTML = "";
+                // return false;
+            }
+            // return true;
+        }
+        // function loc() {
+        //     window.location.href = 'http://localhost:8080/wallet/location_check';
+        // }
+    </script>
+    <!-- <script>
+        function val() {
+            var choice = document.forms["myForm"]["location"].value.trim();
+            var blank = document.forms["myForm"]["blank"].value.trim();
+            var minar = document.forms["myForm"]["minar"].value.trim();
+            var fort = document.forms["myForm"]["fort"].value;
+            var mm_alam = document.forms["myForm"]["mm_alam"].value.trim();
+            var faisalabad = document.forms["myForm"]["faisalabad"].value.trim();
+            var IT = document.forms["myForm"]["IT"].value.trim();
+            if (choice === blank) {
+                document.getElementById("blank_err").innerHTML = "Please Select the destination location";
+                document.getElementById("fare_desc").innerHTML = "";
+                document.getElementById("fare").innerHTML = "";
+                return false;
+            }
+            else if (choice === minar) {
+                document.getElementById("blank_err").innerHTML = "";
+                document.getElementById("fare").innerHTML = "Destination Fare: ";
+                document.getElementById("fare-desc").innerHTML = "The Total fare is 300PKR Click on confirm button to travel                      <button type='button' class='btnn'>Confirm</button>";
+                return false;
+            }
+            else if (choice === fort) {
+                // document.getElementById("blank_err").innerHTML = "";
+                document.getElementById("fare_desc").innerHTML = "The Total fare is 350PKR Click on confirm button to travel                      <button type='button' class='btnn'>Confirm</button>";
+                return false;
+            }
+            // else if (password.length < 8) {
+            //     document.getElementById("nam_err").innerHTML = "";
+            //     document.getElementById("email_err").innerHTML = "";
+            //     document.getElementById("pass_err").innerHTML = "Password must be equal than or greater than 8";
+            //     return false;
+            // }
+            // else if (mobile === "") {
+            //     document.getElementById("pass_err").innerHTML = "";
+            //     document.getElementById("mobile_err").innerHTML = "Enter Your Mobile";
+            //     return false;
+            // }
+            // else if (mobile.length < 11 || mobile.length > 11) {
+            //     document.getElementById("nam_err").innerHTML = "";
+            //     document.getElementById("email_err").innerHTML = "";
+            //     document.getElementById("pass_err").innerHTML = "";
+            //     document.getElementById("mobile_err").innerHTML = "Your mobile must be 11 digits";
+            //     return false;
+            // }
+            // else if (cnic === "") {
+            //     document.getElementById("mobile_err").innerHTML = "";
+            //     document.getElementById("ids_err").innerHTML = "Enter Your CNIC";
+            //     return false;
+            // }
+            // else if (cnic.length < 13 || cnic.length > 13) {
+            //     document.getElementById("nam_err").innerHTML = "";
+            //     document.getElementById("email_err").innerHTML = "";
+            //     document.getElementById("pass_err").innerHTML = "";
+            //     document.getElementById("mobile_err").innerHTML = "";
+            //     document.getElementById("ids_err").innerHTML = "Your CNIC must be 13 digits";
+            //     return false;
+            // }
+            else {
+                document.getElementById("blank_err").innerHTML = "";
+                window.location.href = 'http://localhost:8080/wallet';
+            }
+        }
+    </script> -->
+    <!-- <script>
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+            center: {
+                lat: 27.72,
+                lng: 85.36
+            },
+            zoom: 15
+        });
+    </script> -->
+</body>
+
+</html>

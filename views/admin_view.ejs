@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Admin Panel</title>
+    <style>
+        .styles {
+            padding-left: 14%;
+        }
+
+        body {
+            background: whitesmoke;
+        }
+
+        table {
+            border: 2px solid;
+            padding: 5px 5px;
+            width: 90%;
+            color: #4b4276;
+        }
+
+        th {
+            border: 2px solid;
+            padding: 10px 20px;
+            width: 90%;
+            color: #4b4276;
+        }
+
+        .operation {
+            width: 70%;
+        }
+
+        .trr tr,
+        td {
+            border: 2px solid;
+            padding: 17px 10px;
+            color: #4b4276;
+            width: 100%;
+        }
+
+        h1 {
+
+            color: #4b4276;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Permission</h2>
+            <ul>
+                <%if(role===admin){%>
+
+                    <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+                    <li><a href="http://localhost:8080/area_of_interest"><i class="fa fa-address-book-o"></i>Area of
+                            Interest </a>
+                    <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User Record</a>
+                    </li>
+                    <li><a href="http://localhost:8080/admin_add_user"><i class="fa fa-address-book-o"></i>Add User </a>
+                    </li>
+                    <li><a href="http://localhost:8080/admin_wallet"><i class="fa fa-bank"></i>Wallet </a>
+                    </li>
+                    <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+                    <%} else if(role===view || role===deleted|| role===edit ){%>
+
+                        <li><a href="http://localhost:8080/admin_home"><i class="fa fa-home"></i>Home</a></li>
+
+                        <li><a href="http://localhost:8080/admin_view"><i class="fa fa-address-card-o"></i>User
+                                Record</a>
+                        </li>
+                        <li><a href="http://localhost:8080/wallet"><i class="fa fa-bank"></i>Wallet </a>
+                        </li>
+                        <li><a href="http://localhost:8080/logout"><i class="fa fa-sign-out"></i>Logout </a></li>
+                        <%}%>
+            </ul>
+        </div>
+    </div>
+    <center>
+        <div class="styles">
+            <!--  -->
+            <div class="container">
+                <% if(msg.length>0){%>
+                    <div class="<%=err_msg%>">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <%= msg%>
+                    </div>
+                    <% }%>
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <td colspan="6">
+                                        <center>
+                                            <h1>Record</h1><br>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>CNIC</th>
+                                    <th>Mobile number</th>
+                                    <th>Roles</th>
+                                    <th colspan="2" class="operation"> Operations </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div class="trr">
+                                    <% registration_forms.forEach((record)=>{%>
+                                        <tr>
+                                            <td>
+                                                <%- record.name %>
+                                            </td>
+                                            <td>
+                                                <%- record.email %>
+                                            </td>
+                                            <td>
+                                                <%- record.cnic %>
+                                            </td>
+                                            <td>
+                                                <%- record.mobile %>
+                                            </td>
+                                            <td>
+                                                <%- record.roles %>
+                                            </td>
+                                            <td>
+                                                <div id="button">
+                                                    <%if (role===admin ) {%>
+                                                        <a href="/view/<%= record._id%>" class="btn fa fa-eye"
+                                                            style="font-size:16px">View</a>
+                                                        <a href="/edit/<%= record._id%>" class="btn fa fa-edit"
+                                                            style="font-size:16px">Edit</a>
+                                                        <%if(curr_user_email!==record.email){%><br>
+                                                            <a href="/delete/<%= record._id%>" class="btn fa fa-trash"
+                                                                style="font-size:16px">Delete</a>
+                                                            <%}} else if (role===view ) {%>
+                                                                <a href="/view/<%= record._id%>" class="btn fa fa-eye"
+                                                                    style="font-size:16px">View</a>
+                                                                <%} else if (role===edit ) {%>
+                                                                    <a href="/edit/<%= record._id%>"
+                                                                        class="btn fa fa-edit"
+                                                                        style="font-size:16px">Edit</a>
+                                                                    <%} else if (role===deleted ) {
+                                                                        if(curr_user_email!==record.email){%>
+                                                                        <a href="/delete/<%= record._id%>"
+                                                                            class="btn fa fa-trash"
+                                                                            style="font-size:16px">Delete</a>
+                                                                        <%}else{%>
+                                                                            <a href="/view/<%= record._id%>"
+                                                                                class="btn fa fa-eye"
+                                                                                style="font-size:16px">View</a>
+                                                                            <%}} %>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% })%>
+                                </div>
+
+                            </tbody>
+                        </table>
+            </div>
+        </div>
+    </center>
+</body>
+
+</html>
